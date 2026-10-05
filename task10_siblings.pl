@@ -1,8 +1,3 @@
-% ============================================
-% Task 10: Find All Siblings (using findall/3)
-% ============================================
-
-% Sample parent facts
 parent(alice, bob).
 parent(alice, carol).
 parent(david, emma).

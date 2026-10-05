@@ -1,8 +1,3 @@
-% ============================================
-% Task 15: Family Tree - Uncle/Aunt Relation
-% ============================================
-
-% Parent facts
 parent(tom, bob).
 parent(tom, alice).
 parent(emily, bob).

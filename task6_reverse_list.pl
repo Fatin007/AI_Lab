@@ -1,7 +1,3 @@
-% ============================================
-% Task 6: Reverse a List (using recursion)
-% ============================================
-
 reverse_list([], []).
 reverse_list([H|T], Rev) :-
     reverse_list(T, RevT),

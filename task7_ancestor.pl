@@ -1,8 +1,3 @@
-% ============================================
-% Task 7: Ancestor and Descendant Relations
-% ============================================
-
-% Sample parent facts
 parent(john, mary).
 parent(john, tom).
 parent(mary, ann).

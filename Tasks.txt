@@ -1,0 +1,64 @@
+Lab 6 (Review of previous lecture notes)
+
+
+1. Factorial Calculation (Recursion)
+
+	Write a Prolog program to calculate the factorial of a number using recursion.
+
+2. Sum of Even Numbers in a List
+	
+	Define a predicate sum_even(List, Sum) that returns the sum of all even numbers in 	a given list.
+
+3. Palindrome Checker
+
+	Write a predicate palindrome(List) that succeeds if the given list is a palindrome.
+
+4. Maximum Element in a List
+
+	Write a predicate max_list(List, Max) to find the largest number in a list using 	recursion.
+
+5. List Length Without Built-in Predicates
+
+	Define a recursive rule to calculate the length of a list.
+
+6. Reverse a List
+
+	Define a predicate reverse_list(Input, Output) using recursion
+
+7. Ancestor and Descendant Relations
+
+	Given parent/2 facts, define ancestor/2 and descendant/2 recursively.
+
+8. Simple Arithmetic Expression Evaluator
+
+Given a term like add(3, mul(2, 4)), evaluate the expression.
+
+9. Count Occurrences of an Element
+
+	Write a predicate count_elem(List, Elem, Count) that counts how many times Elem appears 	in List.
+
+10. Find All Siblings
+
+Given parent/2 facts, write a rule to find all siblings of a person using findall/3.
+
+11. N-th Element of a List
+
+Write a predicate nth_element(N, List, Elem) that retrieves the N-th element (1-based indexing).
+
+12. Check if List is Sorted
+
+	Write a predicate sorted(List) that succeeds only if the list is sorted in ascending order.
+
+13. Check Prime Number
+
+	Define is_prime(N) that checks if N is a prime using basic divisor checking.
+
+14. Fibonacci Series Generator (Non-memoized)
+
+	Write a predicate fib(N, F) to generate the N-th Fibonacci number recursively.
+
+15. Family Tree – Uncle/Aunt Relation
+
+	Extend parent/2 to define uncle/2 or aunt/2 using sibling/2.
+
+

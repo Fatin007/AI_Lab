@@ -38,9 +38,13 @@ swipl --version
 
 ---
 
-## How to Run
+## General Usage
 
-Open SWI-Prolog in this directory and load any task file:
+There are two ways to use any task file.
+
+### Option A - Interactive REPL
+
+Open SWI-Prolog in this directory and load a file with `[file].`:
 
 ```bash
 swipl
@@ -48,11 +52,15 @@ swipl
 ?- factorial(5, X).           % runs the query
 ```
 
-Alternatively, you can run Prolog directly from the command line:
+### Option B - One-shot from the command line
+
+Pass the file with `-f` and a goal with `-g`:
 
 ```bash
 swipl -q -f task1_factorial.pl -g "factorial(5, X), format('Factorial(5) = ~w~n', [X]), halt."
 ```
+
+> **Tip:** to exit the REPL after a single query, end your `-g` goal with `, halt.`
 
 ---
 
@@ -63,6 +71,22 @@ swipl -q -f task1_factorial.pl -g "factorial(5, X), format('Factorial(5) = ~w~n'
 Computes the factorial of a non-negative integer using recursive rules.
 
 **Predicate:** `factorial(N, F)` — `F` is the factorial of `N`.
+
+### How to Run
+
+```bash
+swipl
+?- [task1_factorial].
+?- factorial(5, X).
+```
+
+Or in one shot:
+
+```bash
+swipl -q -f task1_factorial.pl -g "factorial(5, X), format('Factorial(5) = ~w~n', [X]), halt."
+```
+
+### Example Queries
 
 ```prolog
 ?- factorial(5, X).
@@ -81,6 +105,22 @@ X = 1.
 Adds up all even numbers in a given list.
 
 **Predicate:** `sum_even(List, Sum)` — `Sum` is the total of all even elements in `List`.
+
+### How to Run
+
+```bash
+swipl
+?- [task2_sum_even].
+?- sum_even([1, 2, 3, 4, 5, 6], X).
+```
+
+Or in one shot:
+
+```bash
+swipl -q -f task2_sum_even.pl -g "sum_even([1,2,3,4,5,6], X), format('Sum = ~w~n', [X]), halt."
+```
+
+### Example Queries
 
 ```prolog
 ?- sum_even([1, 2, 3, 4, 5, 6], X).
@@ -102,6 +142,22 @@ Succeeds when the input list reads the same forwards and backwards.
 
 Two small utility predicates (`last_element/2`, `remove_last/2`) are used as helpers.
 
+### How to Run
+
+```bash
+swipl
+?- [task3_palindrome].
+?- palindrome([a, b, c, b, a]).
+```
+
+Or in one shot:
+
+```bash
+swipl -q -f task3_palindrome.pl -g "(palindrome([a,b,c,b,a]) -> write('palindrome') ; write('not palindrome')), nl, halt."
+```
+
+### Example Queries
+
 ```prolog
 ?- palindrome([a, b, c, b, a]).
 true.
@@ -119,6 +175,22 @@ false.
 Finds the largest number in a list recursively.
 
 **Predicate:** `max_list(List, Max)`
+
+### How to Run
+
+```bash
+swipl
+?- [task4_max_list].
+?- max_list([3, 1, 4, 1, 5, 9, 2, 6], X).
+```
+
+Or in one shot:
+
+```bash
+swipl -q -f task4_max_list.pl -g "max_list([3,1,4,1,5,9,2,6], X), format('Max = ~w~n', [X]), halt."
+```
+
+### Example Queries
 
 ```prolog
 ?- max_list([3, 1, 4, 1, 5, 9, 2, 6], X).
@@ -138,6 +210,22 @@ Computes the length of a list using only custom recursive rules.
 
 **Predicate:** `list_length(List, N)`
 
+### How to Run
+
+```bash
+swipl
+?- [task5_list_length].
+?- list_length([a, b, c, d, e], X).
+```
+
+Or in one shot:
+
+```bash
+swipl -q -f task5_list_length.pl -g "list_length([a,b,c,d,e], X), format('Length = ~w~n', [X]), halt."
+```
+
+### Example Queries
+
 ```prolog
 ?- list_length([a, b, c, d, e], X).
 X = 5.
@@ -155,6 +243,22 @@ X = 0.
 Returns the reversed version of the input list.
 
 **Predicate:** `reverse_list(Input, Output)`
+
+### How to Run
+
+```bash
+swipl
+?- [task6_reverse_list].
+?- reverse_list([1, 2, 3, 4], X).
+```
+
+Or in one shot:
+
+```bash
+swipl -q -f task6_reverse_list.pl -g "reverse_list([1,2,3,4], X), format('Reversed = ~w~n', [X]), halt."
+```
+
+### Example Queries
 
 ```prolog
 ?- reverse_list([1, 2, 3, 4], X).
@@ -183,6 +287,24 @@ parent(mary, ann).
 **Predicate:** `ancestor(X, Y)` — `X` is an ancestor of `Y`.
 **Predicate:** `descendant(X, Y)` — `X` is a descendant of `Y`.
 
+### How to Run
+
+```bash
+swipl
+?- [task7_ancestor].
+?- ancestor(john, ann).
+?- ancestor(john, X).         % press ; to see all descendants
+?- ancestor(X, kate).         % press ; to see all ancestors
+```
+
+Or in one shot:
+
+```bash
+swipl -q -f task7_ancestor.pl -g "(ancestor(john, ann) -> write('john is ancestor of ann') ; write('not an ancestor')), nl, halt."
+```
+
+### Example Queries
+
 ```prolog
 ?- ancestor(john, ann).
 true.
@@ -206,6 +328,22 @@ Evaluates nested arithmetic expressions written as Prolog terms, e.g. `add(3, mu
 
 **Predicate:** `eval(Expr, Result)`
 
+### How to Run
+
+```bash
+swipl
+?- [task8_expression_evaluator].
+?- eval(add(3, mul(2, 4)), X).
+```
+
+Or in one shot:
+
+```bash
+swipl -q -f task8_expression_evaluator.pl -g "eval(add(3, mul(2, 4)), X), format('Result = ~w~n', [X]), halt."
+```
+
+### Example Queries
+
 ```prolog
 ?- eval(add(3, mul(2, 4)), X).
 X = 11.
@@ -223,6 +361,22 @@ X = 25.
 Counts how many times a given element appears in a list.
 
 **Predicate:** `count_elem(List, Elem, Count)`
+
+### How to Run
+
+```bash
+swipl
+?- [task9_count_elem].
+?- count_elem([1, 2, 3, 2, 4, 2, 5], 2, X).
+```
+
+Or in one shot:
+
+```bash
+swipl -q -f task9_count_elem.pl -g "count_elem([1,2,3,2,4,2,5], 2, X), format('Count = ~w~n', [X]), halt."
+```
+
+### Example Queries
 
 ```prolog
 ?- count_elem([1, 2, 3, 2, 4, 2, 5], 2, X).
@@ -250,6 +404,22 @@ parent(alice, carol).
 
 **Predicate:** `siblings_of(X, Siblings)` — `Siblings` is the list of all siblings of `X`.
 
+### How to Run
+
+```bash
+swipl
+?- [task10_siblings].
+?- siblings_of(bob, X).
+```
+
+Or in one shot:
+
+```bash
+swipl -q -f task10_siblings.pl -g "siblings_of(bob, X), format('Siblings of bob = ~w~n', [X]), halt."
+```
+
+### Example Queries
+
 ```prolog
 ?- siblings_of(bob, X).
 X = [carol].
@@ -268,6 +438,22 @@ Retrieves the N-th element of a list using 1-based indexing.
 
 **Predicate:** `nth_element(N, List, Elem)`
 
+### How to Run
+
+```bash
+swipl
+?- [task11_nth_element].
+?- nth_element(3, [a, b, c, d, e], X).
+```
+
+Or in one shot:
+
+```bash
+swipl -q -f task11_nth_element.pl -g "nth_element(3, [a,b,c,d,e], X), format('3rd element = ~w~n', [X]), halt."
+```
+
+### Example Queries
+
 ```prolog
 ?- nth_element(3, [a, b, c, d, e], X).
 X = c.
@@ -285,6 +471,22 @@ X = 10.
 Succeeds if the list is sorted in ascending (non-decreasing) order.
 
 **Predicate:** `sorted(List)`
+
+### How to Run
+
+```bash
+swipl
+?- [task12_sorted].
+?- sorted([1, 2, 3, 4, 5]).
+```
+
+Or in one shot:
+
+```bash
+swipl -q -f task12_sorted.pl -g "(sorted([1,2,3,4,5]) -> write('sorted') ; write('not sorted')), nl, halt."
+```
+
+### Example Queries
 
 ```prolog
 ?- sorted([1, 2, 3, 4, 5]).
@@ -306,6 +508,23 @@ true.
 Tests whether a positive integer is prime. Checks divisibility by 2 and odd divisors up to `sqrt(N)`.
 
 **Predicate:** `is_prime(N)`
+
+### How to Run
+
+```bash
+swipl
+?- [task13_is_prime].
+?- is_prime(7).
+?- is_prime(9).
+```
+
+Or in one shot:
+
+```bash
+swipl -q -f task13_is_prime.pl -g "(is_prime(7) -> write('prime') ; write('not prime')), nl, halt."
+```
+
+### Example Queries
 
 ```prolog
 ?- is_prime(7).
@@ -330,6 +549,22 @@ false.
 Computes the N-th Fibonacci number using naive recursion (no memoization).
 
 **Predicate:** `fib(N, F)` — `F` is the N-th Fibonacci number (with `fib(0) = 0`, `fib(1) = 1`).
+
+### How to Run
+
+```bash
+swipl
+?- [task14_fibonacci].
+?- fib(7, X).
+```
+
+Or in one shot:
+
+```bash
+swipl -q -f task14_fibonacci.pl -g "fib(10, X), format('Fib(10) = ~w~n', [X]), halt."
+```
+
+### Example Queries
 
 ```prolog
 ?- fib(0, X).
@@ -366,6 +601,25 @@ Defines `uncle/2` and `aunt/2` based on a `parent/2` family database and a `sibl
 - `sibling(X, Y)` — `X` and `Y` share at least one parent.
 - `uncle(U, N)` — `U` is the uncle of `N` (i.e. the brother of one of `N`'s parents).
 - `aunt(A, N)` — `A` is the aunt of `N` (i.e. the sister of one of `N`'s parents).
+
+### How to Run
+
+```bash
+swipl
+?- [task15_uncle_aunt].
+?- uncle(bob, dave).
+?- aunt(alice, charlie).
+?- uncle(U, charlie).         % press ; to find every uncle
+?- aunt(A, charlie).          % press ; to find every aunt
+```
+
+Or in one shot:
+
+```bash
+swipl -q -f task15_uncle_aunt.pl -g "(uncle(bob, dave) -> write('bob is uncle of dave') ; write('not uncle')), nl, halt."
+```
+
+### Example Queries
 
 ```prolog
 ?- uncle(bob, dave).
@@ -411,17 +665,3 @@ true.
 - Helper predicates are included where needed (e.g. `last_element/2`, `remove_last/2` for the palindrome task).
 - All predicates use only the standard library built-ins (`is/2`, `mod/2`, `max/2`, `findall/3`, `append/3`).
 - The Fibonacci predicate is intentionally **non-memoized** as the task requires the naive recursive version.
-
----
-
-## Quick Test Script
-
-To try every predicate at once, run them interactively from SWI-Prolog:
-
-```prolog
-?- [task1_factorial],  factorial(5, F1), format('Factorial(5) = ~w~n', [F1]).
-?- [task4_max_list],    max_list([3,1,4,1,5,9,2,6], M), format('Max = ~w~n', [M]).
-?- [task8_expression_evaluator], eval(add(3, mul(2, 4)), R), format('Expr = ~w~n', [R]).
-?- [task13_is_prime],   (is_prime(7) -> write('7 is prime') ; write('7 not prime')), nl.
-?- [task14_fibonacci],  fib(10, F), format('Fib(10) = ~w~n', [F]).
-```

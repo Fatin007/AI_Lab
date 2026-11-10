@@ -1,22 +1,18 @@
 :- dynamic book/3.
 
-% ---------- Initial Database ----------
 book('Data Mining: Concepts and Techniques', 'Vikram Pudi', 'available').
 book('Introduction to Algorithms', 'Thomas H. Cormen', 'borrowed').
 book('Programming in ANSI C', 'E. Balagurusamy', 'available').
 book('Database System Concepts', 'Abraham Silberschatz', 'available').
 
-% ---------- Input Helper ----------
 get_input(Value) :-
     read_line_to_string(user_input, Input),
     normalize_space(string(CleanInput), Input),
     atom_string(Value, CleanInput).
 
-% ---------- Entry Point ----------
 start :-
     menu.
 
-% ---------- Menu ----------
 menu :-
     nl,
     write('===== LIBRARY BOOK MANAGEMENT SYSTEM ====='), nl,
@@ -29,7 +25,6 @@ menu :-
     write('Enter your choice: '),
     read_line_to_string(user_input, Input),(catch(number_string(Choice, Input), _, fail)->handle_choice(Choice); write('Invalid choice.'), nl, menu).
 
-% ---------- Handle Menu Choices ----------
 handle_choice(1) :-
     add_book,
     menu.
@@ -57,11 +52,10 @@ handle_choice(_) :-
     write('Invalid choice. Please enter a number from 1 to 6.'), nl,
     menu.
 
-% ---------- Helper: Validate Status ----------
 valid_status(available).
 valid_status(borrowed).
 
-% ---------- 1. Add New Book (assertz) ----------
+% ---------- Add New Book ----------
 add_book :-
     write('Enter book title: '),
     get_input(Title),
@@ -78,7 +72,7 @@ add_book :-
         )
     ).
 
-% ---------- 2. Update Book Status (retract + assertz) ----------
+% ---------- Update Book Status ----------
 update_book :-
     write('Enter book title: '),
     get_input(Title),
@@ -94,7 +88,7 @@ update_book :-
     ;   write('Book not found.'), nl
     ).
 
-% ---------- 3. Remove Book (retract) ----------
+% ---------- Remove Book ----------
 remove_book :-
     write('Enter book title: '),
     get_input(Title),
@@ -103,7 +97,7 @@ remove_book :-
     ;   write('Book not found.'), nl
     ).
 
-% ---------- 4. Show All Books ----------
+% ---------- Show All Books ----------
 show_books :-
     (   book(_, _, _)
     ->  write('Library Book Records:'), nl,
@@ -115,7 +109,7 @@ show_books :-
     ;   write('The library has no books.'), nl
     ).
 
-% ---------- 5. Search Book ----------
+% ---------- Search Book ----------
 search_book :-
     write('Enter book title: '),
     get_input(Title),

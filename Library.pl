@@ -10,6 +10,10 @@ get_input(Value) :-
     normalize_space(string(CleanInput), Input),
     atom_string(Value, CleanInput).
 
+get_choice(Choice):-
+    read_line_to_string(user_input, Input),
+    catch(number_string(Choice, Input), _, fail).
+
 start :-
     menu.
 
@@ -23,7 +27,7 @@ menu :-
     write('5. Search Book'), nl,
     write('6. Exit'), nl,
     write('Enter your choice: '),
-    read_line_to_string(user_input, Input),(catch(number_string(Choice, Input), _, fail)->handle_choice(Choice); write('Invalid choice.'), nl, menu).
+    get_choice(Choice),(handle_choice(Choice) ; write('Invalid choice.'), nl, menu).
 
 handle_choice(1) :-
     add_book,
@@ -49,7 +53,7 @@ handle_choice(6) :-
     write('Thank you for using the Library Management System!'), nl.
 
 handle_choice(_) :-
-    write('Invalid choice. Please enter a number from 1 to 6.'), nl,
+    write('Invalid choice.'), nl,
     menu.
 
 valid_status(available).

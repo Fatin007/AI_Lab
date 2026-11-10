@@ -55,40 +55,27 @@ handle_choice(_) :-
 valid_status(available).
 valid_status(borrowed).
 
-% ---------- Add New Book ----------
+% Add New Book 
 add_book :-
     write('Enter book title: '),
     get_input(Title),
-    (   book(Title, _, _)
-    ->  write('A book with this title already exists.'), nl
-    ;   write('Enter author name: '),
+        (book(Title, _, _)->write('A book with this title already exists.'), nl ; write('Enter author name: '),
         get_input(Author),
         write('Enter book status (available/borrowed): '),
         get_input(Status),
-        (   valid_status(Status)
-        ->  assertz(book(Title, Author, Status)),
-            write('Book added successfully.'), nl
-        ;   write('Invalid status. Use available or borrowed.'), nl
-        )
+        (valid_status(Status)->assertz(book(Title, Author, Status)), write('Book added successfully.'), nl ; write('Invalid status. Use available or borrowed.'), nl)
     ).
 
-% ---------- Update Book Status ----------
+% Update Book Status
 update_book :-
     write('Enter book title: '),
-    get_input(Title),
-    (   book(Title, Author, _)
-    ->  write('Enter new status (available/borrowed): '),
+    get_input(Title), (book(Title, Author, _) -> write('Enter new status (available/borrowed): '),
         get_input(NewStatus),
-        (   valid_status(NewStatus)
-        ->  retract(book(Title, Author, _)),
-            assertz(book(Title, Author, NewStatus)),
-            write('Book status updated successfully.'), nl
-        ;   write('Invalid status. Use available or borrowed.'), nl
-        )
-    ;   write('Book not found.'), nl
+        (valid_status(NewStatus)->retract(book(Title, Author, _)), assertz(book(Title, Author, NewStatus)), write('Book status updated successfully.'), nl ; write('Invalid status. Use available or borrowed.'), nl) 
+        ; write('Book not found.'), nl
     ).
 
-% ---------- Remove Book ----------
+% Remove Book 
 remove_book :-
     write('Enter book title: '),
     get_input(Title),
@@ -97,25 +84,23 @@ remove_book :-
     ;   write('Book not found.'), nl
     ).
 
-% ---------- Show All Books ----------
+% Show All Books 
 show_books :-
     (   book(_, _, _)
     ->  write('Library Book Records:'), nl,
         forall(
             book(Title, Author, Status),
-            format('Title: ~w  Author: ~w  Status: ~w~n',
-                   [Title, Author, Status])
+            format('Title: ~w  Author: ~w  Status: ~w~n', [Title, Author, Status])
         )
     ;   write('The library has no books.'), nl
     ).
 
-% ---------- Search Book ----------
+% Search Book
 search_book :-
     write('Enter book title: '),
     get_input(Title),
     (   book(Title, Author, Status)
     ->  write('Book Found!'), nl,
-        format('Title: ~w~nAuthor: ~w~nStatus: ~w~n',
-               [Title, Author, Status])
+        format('Title: ~w~nAuthor: ~w~nStatus: ~w~n', [Title, Author, Status])
     ;   write('Book not found.'), nl
     ).

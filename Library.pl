@@ -50,11 +50,11 @@ handle_choice(5) :-
     menu.
 
 handle_choice(6) :-
-    write('Thank you for using the Library Management System!'), nl.
+    write('Bye Bye!'), nl.
 
 handle_choice(_) :-
     write('Invalid choice.'), nl,
-    menu.
+    % menu.
 
 valid_status(available).
 valid_status(borrowed).
@@ -73,38 +73,35 @@ add_book :-
 % Update Book Status
 update_book :-
     write('Enter book title: '),
-    get_input(Title), (book(Title, Author, _) -> write('Enter new status (available/borrowed): '),
-        get_input(NewStatus),
-        (valid_status(NewStatus)->retract(book(Title, Author, _)), assertz(book(Title, Author, NewStatus)), write('Book status updated successfully.'), nl ; write('Invalid status. Use available or borrowed.'), nl) 
-        ; write('Book not found.'), nl
+    get_input(Title), (book(Title, Author, _)-> 
+        write('Enter new status (available/borrowed): '),
+        get_input(NewStatus),(valid_status(NewStatus)->
+            retract(book(Title, Author, _)), assertz(book(Title, Author, NewStatus)), write('Book status updated successfully.'), nl ; 
+            write('Invalid status. Use available or borrowed.'), nl);
+        write('Book not found.'), nl
     ).
 
 % Remove Book 
 remove_book :-
     write('Enter book title: '),
-    get_input(Title),
-    (   retract(book(Title, _, _))
-    ->  write('Book removed successfully.'), nl
-    ;   write('Book not found.'), nl
+    get_input(Title), (retract(book(Title, _, _))-> 
+        write('Book removed successfully.'), nl;   
+        write('Book not found.'), nl
     ).
 
 % Show All Books 
 show_books :-
-    (   book(_, _, _)
-    ->  write('Library Book Records:'), nl,
-        forall(
-            book(Title, Author, Status),
-            format('Title: ~w  Author: ~w  Status: ~w~n', [Title, Author, Status])
-        )
-    ;   write('The library has no books.'), nl
+    (book(_, _, _)->  
+        write('Library Book Records:'), nl, forall(
+                book(Title, Author, Status),
+                format('Title: ~w  Author: ~w  Status: ~w~n', [Title, Author, Status]));       
+        write('The library has no books.'), nl
     ).
 
 % Search Book
 search_book :-
     write('Enter book title: '),
-    get_input(Title),
-    (   book(Title, Author, Status)
-    ->  write('Book Found!'), nl,
-        format('Title: ~w~nAuthor: ~w~nStatus: ~w~n', [Title, Author, Status])
-    ;   write('Book not found.'), nl
+    get_input(Title),(book(Title, Author, Status)->
+        write('Book Found!'), nl, format('Title: ~w~nAuthor: ~w~nStatus: ~w~n', [Title, Author, Status]) ;
+        write('Book not found.'), nl
     ).

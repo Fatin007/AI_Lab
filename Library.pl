@@ -26,13 +26,8 @@ menu :-
     write('4. Show All Books'), nl,
     write('5. Search Book'), nl,
     write('6. Exit'), nl,
-    write('Enter your choice (1-6): '),
-    read_line_to_string(user_input, Input),
-    (   catch(number_string(Choice, Input), _, fail)
-    ->  handle_choice(Choice)
-    ;   write('Invalid choice. Please enter a number from 1 to 6.'), nl,
-        menu
-    ).
+    write('Enter your choice: '),
+    read_line_to_string(user_input, Input),(catch(number_string(Choice, Input), _, fail)->handle_choice(Choice); write('Invalid choice.'), nl, menu).
 
 % ---------- Handle Menu Choices ----------
 handle_choice(1) :-

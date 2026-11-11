@@ -54,7 +54,7 @@ handle_choice(6) :-
 
 handle_choice(_) :-
     write('Invalid choice.'), nl,
-    % menu.
+    menu.
 
 valid_status(available).
 valid_status(borrowed).
